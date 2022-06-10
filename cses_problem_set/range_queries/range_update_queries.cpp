@@ -24,9 +24,11 @@ void upd(int a, int b, ll x) {
     a += n, b += n;
     while (a <= b) {
         if (a % 2 == 1) {
+            debug(a);
             ST[a++] += x;
         }
         if (b % 2 == 0) {
+            debug(b);
             ST[b--] += x;
         }
         a /= 2, b /= 2;
@@ -41,8 +43,8 @@ ll qry(int k) {
     return s;
 }
 int main() {
-    ios_base::sync_with_stdio(false);
-    cin.tie(0);
+    // ios_base::sync_with_stdio(false);
+    // cin.tie(0);
     cin >> n >> q;
     for (int i = 0; i < n; i++) {
         ll num; cin >> num;
