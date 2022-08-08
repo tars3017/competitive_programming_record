@@ -17,18 +17,18 @@ template<typename I, typename...T>void _DO(I&&x, T&&...tail) {
 #define S second
 #define pii pair<int, int>
 #define ll long long
-int rand(int a, int b) {
-    return a + rand() % (b-a+1);
-}
-int main(int argc, char* argv[]) {
+
+int main() {
     ios_base::sync_with_stdio(false);
     cin.tie(0);
-    srand(atoi(argv[1]));
-    int n = rand(1, 3), t = rand(3, 15), l = rand(2, 4);
-    printf("%d %d %d\n", n, t, l);
-    for (int i = 0; i < n; ++i) {
-        printf("%d %d\n", rand(1, 10), rand(1, 10));
-    }
+    int a, b, c; cin >> a >> b >> c;
+    if (a < b) swap(a, b);
+    if (b < c) swap(b, c);
+    if (a < b) swap(a, b);
+    if (a == b && b == c) cout << 3 << ' ' << a << endl;
+    else if (a == b && b != c) cout << 2 << ' ' << b << ' ' << c << endl;
+    else if (a != b && b == c) cout << 2 << ' ' << a << ' ' << c << endl;
+    else cout << 1 << ' ' << a << ' ' << b << ' ' << c << endl;
     return 0;
 }
 

@@ -17,18 +17,29 @@ template<typename I, typename...T>void _DO(I&&x, T&&...tail) {
 #define S second
 #define pii pair<int, int>
 #define ll long long
-int rand(int a, int b) {
-    return a + rand() % (b-a+1);
+
+ll arr[5005];
+ll d[5005][5005][3];
+int n; 
+ll dp(int l, int r, bool my_turn) {
+    if (l > r || r > n) return 0;
+    if (d[l][r][my_turn]) return d[l][r][my_turn];
+    debug(l, r, my_turn);
+    if (my_turn) {
+        return d[l][r][my_turn] = max(dp(l, r-1, !my_turn)+arr[r], dp(l+1, r, !my_turn)+arr[l]);
+    }
+    else {
+        return d[l][r][my_turn] = min(dp(l, r-1, !my_turn), dp(l+1, r, !my_turn));
+    }
 }
-int main(int argc, char* argv[]) {
+int main() {
     ios_base::sync_with_stdio(false);
     cin.tie(0);
-    srand(atoi(argv[1]));
-    int n = rand(1, 3), t = rand(3, 15), l = rand(2, 4);
-    printf("%d %d %d\n", n, t, l);
-    for (int i = 0; i < n; ++i) {
-        printf("%d %d\n", rand(1, 10), rand(1, 10));
+    cin >> n;
+    for (int i = 1; i <= n; ++i) {
+        cin >> arr[i];
     }
+    cout << dp(1, n, 1) << endl;
     return 0;
 }
 

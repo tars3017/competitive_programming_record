@@ -23,9 +23,7 @@ template<typename I, typename...T>void _DO(I&&x, T&&...tail) {
 pii w[205], v[205];
 pii dp[205][1005];
 bool cmp(pii a, pii b) {
-    if (a.F != b.F) 
-        return a.F > b.F;
-    return a.S > b.S;
+    return a.F > b.F;
 }
 int main() {
     ios_base::sync_with_stdio(false);
@@ -36,36 +34,28 @@ int main() {
     }
     sort(w+1, w+1+n, cmp);
     for (int j = 0; j < w[1].F; ++j) {
-        /* dp[1][j].F = -0x3f3f3f3f; */
+        dp[1][j].F = -0x3f3f3f3f;
     }
-    int ans = 0;
     for (int j = w[1].F; j <= t; ++j) {
         dp[1][j].F = w[1].S;
         dp[1][j].S = 1;
-        ans = max(ans, dp[1][j].F);
     }
     for (int i = 2; i <= n; ++i) {
-            for (int k = 1; k <= l; ++k) {
         for (int j = 0; j <= t; ++j) {
             dp[i][j].F = dp[i-1][j].F;
             dp[i][j].S = dp[i-1][j].S;
-                if (j-w[i].F*k >= 0) {
-                    debug(i, j, k, j-w[i].F*k, dp[i-1][j-w[i].F*k].F, dp[i-1][j-w[i].F*k].S);
-                }
+            for (int k = 1; k <= l; ++k) {
                 if (j - w[i].F*k >= 0 && dp[i-1][j-w[i].F*k].S+1 == k) {
-                    debug("match", i, j, k, dp[i-1][j-w[i].F*k].F, dp[i-1][j-w[i].F*k].S);
+                    debug(i, j, k, dp[i-1][j-w[i].F*k].F, dp[i-1][j-w[i].F*k].S);
                     if (dp[i-1][j-w[i].F*k].F+w[i].S > dp[i][j].F) {
                         dp[i][j].F = dp[i-1][j-w[i].F*k].F + w[i].S;
                         dp[i][j].S = dp[i-1][j-w[i].F*k].S + 1;
-                        debug("bigger", dp[i][j].F);
-                        ans = max(ans, dp[i][j].F);
                     }
-                    /* debug(dp[i][j].F, dp[i][j].S); */
                 }
             }
         }
     }
-    cout << ans << endl;
+    cout << dp[n][t].F << endl;
     Time();
     return 0;
 }

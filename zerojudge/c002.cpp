@@ -10,25 +10,29 @@ template<typename I, typename...T>void _DO(I&&x, T&&...tail) {
     cerr<<x<<", ";
     _DO(tail...);
 }
+#define Time() cerr << "Time elapsed: " << 1.0*clock() / CLOCKS_PER_SEC << " s.\n";
 #else 
 #define debug(...)
+#define Time()
 #endif
 #define F first
 #define S second
 #define pii pair<int, int>
 #define ll long long
-int rand(int a, int b) {
-    return a + rand() % (b-a+1);
+
+int f(int x) {
+    if (x == 91) return 91;
+    else if (x <= 100) return f(f(x+11));
+    return x-10;
 }
-int main(int argc, char* argv[]) {
+int main() {
     ios_base::sync_with_stdio(false);
     cin.tie(0);
-    srand(atoi(argv[1]));
-    int n = rand(1, 3), t = rand(3, 15), l = rand(2, 4);
-    printf("%d %d %d\n", n, t, l);
-    for (int i = 0; i < n; ++i) {
-        printf("%d %d\n", rand(1, 10), rand(1, 10));
+    int n; 
+    while (cin >> n && n) {
+        cout << "f91(" << n << ") = " << f(n) << endl;
     }
+    Time();
     return 0;
 }
 
