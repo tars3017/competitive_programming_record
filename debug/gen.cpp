@@ -24,11 +24,25 @@ int main(int argc, char* argv[]) {
     ios_base::sync_with_stdio(false);
     cin.tie(0);
     srand(atoi(argv[1]));
-    int n = rand(1, 3), t = rand(3, 15), l = rand(2, 4);
-    printf("%d %d %d\n", n, t, l);
+    printf("1\n");
+    int n = rand(1, 5), r = rand(5, 10), c = rand(5, 10), sr = rand(2, r-2), sc = rand(2, c-2);
+    printf("%d %d %d %d %d\n", n, r, c, sr, sc);
     for (int i = 0; i < n; ++i) {
-        printf("%d %d\n", rand(1, 10), rand(1, 10));
+        int x = rand(1, 4);
+        if (x == 1) {
+            printf("N");
+        }
+        else if (x == 2) {
+            printf("E");
+        }
+        else if (x == 3) {
+            printf("S");
+        }
+        else {
+            printf("W");
+        }
     }
+    printf("\n");
     return 0;
 }
 
